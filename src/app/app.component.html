@@ -1,0 +1,42 @@
+<div class="container mt-5">
+  <h2 class="mb-4">Ingresar Matriz</h2>
+  <form (ngSubmit)="generateMatrix()" class="mb-4">
+    <div class="form-group row">
+      <label for="size" class="col-sm-2 col-form-label">Tamaño de la matriz (n):</label>
+      <div class="col-sm-2">
+        <input id="size" type="number" class="form-control" [(ngModel)]="size" name="size" min="1" required>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Generar Matriz</button>
+  </form>
+
+  <div *ngIf="matrix">
+    <h2 class="text-center my-4">Matriz {{ size }}x{{ size }}</h2>
+    <form (ngSubmit)="checkProperties()" class="mb-4">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <tbody>
+          <tr *ngFor="let row of matrix; let i = index">
+            <td *ngFor="let cell of row; let j = index">
+              <input type="number" class="form-control" [(ngModel)]="matrix[i][j]" name="cell-{{i}}-{{j}}" required>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <button type="submit" class="btn btn-primary">Verificar Propiedades</button>
+    </form>
+  </div>
+
+  <div *ngIf="result">
+    <h3>Resultados</h3>
+    <ul class="list-group">
+      <li class="list-group-item">Reflexiva: {{ result.reflexiva }}</li>
+      <li class="list-group-item">Simétrica: {{ result.simetrica }}</li>
+      <li class="list-group-item">Antisimétrica: {{ result.antisimetrica }}</li>
+      <li class="list-group-item">Transitiva: {{ result.transitiva }}</li>
+      <li class="list-group-item">Relación de Equivalencia: {{ result.equivalencia }}</li>
+      <li class="list-group-item">Relación de Orden Parcial: {{ result.ordenParcial }}</li>
+    </ul>
+  </div>
+</div>
